@@ -1,0 +1,16 @@
+rootProject.name = 'FloatingBubbleExample'
+apply from: file("../node_modules/@react-native/gradle-plugin/settings-gradle.rb")
+includeBuild("../node_modules/@react-native/gradle-plugin")
+
+include ':app'
+includeBuild("../node_modules/react-native-gradle-plugin")
+
+include ':react-native-floating-bubble'
+project(':react-native-floating-bubble').projectDir = new File(rootProject.projectDir, '../../android')
+
+if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {
+    include(":ReactAndroid")
+    project(":ReactAndroid").projectDir = file('../node_modules/react-native/ReactAndroid')
+    include(":ReactAndroid:hermes-engine")
+    project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
+}
